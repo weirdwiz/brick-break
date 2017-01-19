@@ -1,4 +1,3 @@
-
 #include<graphics.h>
 #include<conio.h>
 #include<dos.h>
@@ -13,12 +12,22 @@ struct coordinates
     int y;
 };
 
+struct dabbe
+{
+    int lx;
+    int ly;
+    int rx;
+    int ry;
+};
+
+dabbe platform;                                      //coordinates of bar
+
 coordinates ball;                                    // Coordinates of ball
-//coordinates bar;
+
 
 int testX=1,testY=0;  //Test the rebound
 char ch; //input interprettor
-float diff = 20 ; //the difficulty level
+float diff = 10 ; //the difficulty level
 
 
 void main()
@@ -28,18 +37,35 @@ void main()
     clrscr();
     int maxX = getmaxx()-10;
     int maxY = getmaxy()-10;
-    for( ball.x = maxX/2 , ball.y = maxY ;  ; )
+    for( ball.x = maxX/2 , ball.y = maxY-90, platform.lx=(maxX/2)-50, platform.ly=maxY-90, platform.rx=(maxX/2)+50, platform.ry=maxY-80 ;  ; )
     {
-		move();
-		setcolor(RED);
-		circle(ball.x,ball.y,10);
-		testRebound(maxX,maxY);
-		delay(diff);
-		clrscr();
-		if(kbhit())
-		ch=getch();
-		if(ch=='e')
-	  		break;
+	ch='h';
+	setbkcolor(GREEN);
+	move();
+	setcolor(RED);
+	circle(ball.x,ball.y,10);
+	testRebound(maxX,maxY);
+	delay(diff);
+	clrscr();
+	rectangle(platform.lx,platform.ly, platform.rx, platform.ry);
+
+	if(kbhit())
+	ch=getch();
+
+	if(ch=='e')
+	  break;
+	else if(ch==100)
+	{
+	 platform.lx+=5;
+	 platform.rx+=5;
+	}
+	else if(ch==97)
+	{
+	 platform.lx-=5;
+	 platform.rx-=5;
+	}
+	if(ball.x<=platform.rx+9 && ball.x>=platform.lx-9 && ball.y>=maxY-100)
+	  testX=1;
     }
     getch();
     closegraph();
