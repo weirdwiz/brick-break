@@ -14,20 +14,20 @@ struct coordinates
 
 struct dabbe
 {
-    int lx;
+    int lx;		
     int ly;
     int rx;
     int ry;
 };
 
-dabbe platform;                                      //coordinates of bar
+dabbe platform;                                      //Coordinates of bar
 
 coordinates ball;                                    // Coordinates of ball
 
 
-int testX=1,testY=0;  //Test the rebound
-char ch; //input interprettor
-float diff = 10 ; //the difficulty level
+int testX=1,testY=0;  			//Test the rebound
+char ch; 				//input interprettor
+float diff = 10 ; 			//the difficulty level
 
 
 void main()
@@ -81,6 +81,8 @@ void testRebound(int &x,int &y)
     if (ball.y == 0)
 	testX=0;
  }
+
+
 void move()
 {
     if (testX == 0) //if ball touches the top
