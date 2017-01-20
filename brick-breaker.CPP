@@ -1,7 +1,7 @@
-#include<graphics.h>
-#include<conio.h>
-#include<dos.h>
-
+#include <graphics.h>
+#include <conio.h>
+#include <dos.h>
+#include <math.h>
 void testRebound(int &x,int &y);
 void move();
 
@@ -45,27 +45,32 @@ void main()
 	setcolor(RED);
 	circle(ball.x,ball.y,10);
 	testRebound(maxX,maxY);
+	diff=diff-pow(diff,0.2);                                  //increasing the difficulty as the program proceed
 	delay(diff);
 	clrscr();
 	rectangle(platform.lx,platform.ly, platform.rx, platform.ry);
-
+	
 	if(kbhit())
 	ch=getch();
 
 	if(ch=='e')
 	  break;
+	    
 	else if(ch==100)
 	{
 	 platform.lx+=5;
 	 platform.rx+=5;
 	}
+	    
 	else if(ch==97)
 	{
 	 platform.lx-=5;
 	 platform.rx-=5;
 	}
+	    
 	if(ball.x<=platform.rx+9 && ball.x>=platform.lx-9 && ball.y>=maxY-100)
 	  testX=1;
+	    
     }
     getch();
     closegraph();
