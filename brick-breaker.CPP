@@ -1,13 +1,8 @@
 #include <graphics.h>
 #include <conio.h>
 #include <dos.h>
-<<<<<<< HEAD
 #include <stdlib.h>
-
-
-=======
 #include <math.h>
->>>>>>> origin/master
 void testRebound(int &x,int &y);
 void move();
 
@@ -54,17 +49,13 @@ void main()
 	setfillstyle(SOLID_FILL,RED);
 	fillellipse(ball.x,ball.y,10,10);
 	testRebound(maxX,maxY);
-	diff=diff-pow(diff,0.2);                                  //increasing the difficulty as the program proceed
 	delay(diff);
 	clrscr();
-<<<<<<< HEAD
 	setcolor(BLUE);
 	setfillstyle(SOLID_FILL,BLUE);
 	bar3d(platform.lx,platform.ly, platform.rx, platform.ry,5,1);
-=======
 	rectangle(platform.lx,platform.ly, platform.rx, platform.ry);
 	
->>>>>>> origin/master
 	if(kbhit())
 	ch=getch();
 
