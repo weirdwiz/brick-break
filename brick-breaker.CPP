@@ -1,9 +1,13 @@
 #include <graphics.h>
 #include <conio.h>
 #include <dos.h>
+<<<<<<< HEAD
 #include <stdlib.h>
 
 
+=======
+#include <math.h>
+>>>>>>> origin/master
 void testRebound(int &x,int &y);
 void move();
 
@@ -16,20 +20,20 @@ struct coordinates
 
 struct dabbe
 {
-    int lx;
+    int lx;		
     int ly;
     int rx;
     int ry;
 };
 
-dabbe platform;                                      //coordinates of bar
+dabbe platform;                                      //Coordinates of bar
 
 coordinates ball;                                    // Coordinates of ball
 
 
-int testX=1,testY=0;  //Test the rebound
-char ch; //input interprettor
-float diff = 10 ; //the difficulty level
+int testX=1,testY=0;  			//Test the rebound
+char ch; 				//input interprettor
+float diff = 10 ; 			//the difficulty level
 
 
 void main()
@@ -50,28 +54,38 @@ void main()
 	setfillstyle(SOLID_FILL,RED);
 	fillellipse(ball.x,ball.y,10,10);
 	testRebound(maxX,maxY);
+	diff=diff-pow(diff,0.2);                                  //increasing the difficulty as the program proceed
 	delay(diff);
 	clrscr();
+<<<<<<< HEAD
 	setcolor(BLUE);
 	setfillstyle(SOLID_FILL,BLUE);
 	bar3d(platform.lx,platform.ly, platform.rx, platform.ry,5,1);
+=======
+	rectangle(platform.lx,platform.ly, platform.rx, platform.ry);
+	
+>>>>>>> origin/master
 	if(kbhit())
 	ch=getch();
 
 	if(ch=='e')
 	  break;
+	    
 	else if(ch==100)
 	{
 	 platform.lx+=5;
 	 platform.rx+=5;
 	}
+	    
 	else if(ch==97)
 	{
 	 platform.lx-=5;
 	 platform.rx-=5;
 	}
+	    
 	if(ball.x<=platform.rx+9 && ball.x>=platform.lx-9 && ball.y>=maxY-100)
 	  testX=1;
+	    
     }
     getch();
     closegraph();
@@ -87,6 +101,8 @@ void testRebound(int &x,int &y)
     if (ball.y == 10)
 	testX=0;
  }
+
+
 void move()
 {
     if (testX == 0) //if ball touches the top
