@@ -1,6 +1,8 @@
-#include<graphics.h>
-#include<conio.h>
-#include<dos.h>
+#include <graphics.h>
+#include <conio.h>
+#include <dos.h>
+#include <stdlib.h>
+
 
 void testRebound(int &x,int &y);
 void move();
@@ -32,23 +34,27 @@ float diff = 10 ; //the difficulty level
 
 void main()
 {
+    randomize();
     int gd=DETECT,gm;
     initgraph(&gd,&gm, "c://turboc3/bgi");
     clrscr();
     int maxX = getmaxx()-10;
     int maxY = getmaxy()-10;
-    for( ball.x = maxX/2 , ball.y = maxY-90, platform.lx=(maxX/2)-50, platform.ly=maxY-90, platform.rx=(maxX/2)+50, platform.ry=maxY-80 ;  ; )
+    int x = random(maxX-20)+10;
+    for( ball.x = x , ball.y = maxY-150, platform.lx=(maxX/2)-50, platform.ly=maxY-90, platform.rx=(maxX/2)+50, platform.ry=maxY-80 ;  ; )
     {
 	ch='h';
 	setbkcolor(GREEN);
 	move();
 	setcolor(RED);
-	circle(ball.x,ball.y,10);
+	setfillstyle(SOLID_FILL,RED);
+	fillellipse(ball.x,ball.y,10,10);
 	testRebound(maxX,maxY);
 	delay(diff);
 	clrscr();
-	rectangle(platform.lx,platform.ly, platform.rx, platform.ry);
-
+	setcolor(BLUE);
+	setfillstyle(SOLID_FILL,BLUE);
+	bar3d(platform.lx,platform.ly, platform.rx, platform.ry,5,1);
 	if(kbhit())
 	ch=getch();
 
@@ -76,9 +82,9 @@ void testRebound(int &x,int &y)
 {
     if (ball.x == x)
 	testY=1;
-    else if(ball.x==0)
+    else if(ball.x== 10)
 	 testY=0;
-    if (ball.y == 0)
+    if (ball.y == 10)
 	testX=0;
  }
 void move()
