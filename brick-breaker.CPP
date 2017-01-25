@@ -55,7 +55,7 @@ void main()
 	fillellipse(ball.x,ball.y,10,10);
 	testRebound(maxX,maxY);
 	delay(diff);
-	clrscr();
+	cleardevice();
 	setcolor(BLUE);
 	setfillstyle(SOLID_FILL,BLUE);
 	bar3d(platform.lx,platform.ly, platform.rx, platform.ry,5,1);
