@@ -15,4 +15,11 @@ and bonce off the ball
 
 
 #Status
-WIP
+Implemented
+  - Bricks
+  - Mechanism of breaking of bricks
+  - Bouncing of the ball
+Pending
+  - Color Changing on breaking of bricks
+  - Scoring
+  - Powerups
