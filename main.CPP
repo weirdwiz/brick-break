@@ -35,7 +35,7 @@ int testX=1,testY=0;  //Test the rebound
 char ch; //input interprettor
 float diff = 7 ; //the difficulty level
 
-blocks b[5];
+blocks b[5] = {{ { 50 , 50 , 150 , 100 } , 0 },{ { 160 , 50 , 260 , 100 } , 0 },{ { 270 , 50 , 370 , 100 }, 0 },{ { 380 , 50 , 480 , 100 }, 0 },{ { 490 , 50 , 590 , 100 }, 0 }};
 
 //blocks  b1 = { { 50 , 50 , 150 , 100 } , 0 }
 //	,b2 = { { 160 , 50 , 260 , 100 } , 0 }
@@ -59,11 +59,11 @@ void main()
 //    {
 //        b[i].blks = { 50 + 110*i , 50 , 150 + 110*i , 100 } ;
 //    }
-    b[0] = { { 50 , 50 , 150 , 100 } , 0 };
-    b[1] = { { 160 , 50 , 260 , 100 } , 0 };
-    b[2] = { { 270 , 50 , 370 , 100 }, 0 };
-    b[3] = { { 380 , 50 , 480 , 100 }, 0 };
-    b[4] = { { 490 , 50 , 590 , 100 }, 0 };
+//    b[0] = { { 50 , 50 , 150 , 100 } , 0 };
+//    b[1] = { { 160 , 50 , 260 , 100 } , 0 };
+//    b[2] = { { 270 , 50 , 370 , 100 }, 0 };
+//    b[3] = { { 380 , 50 , 480 , 100 }, 0 };
+//    b[4] = { { 490 , 50 , 590 , 100 }, 0 };
 
     for( ball.x = x , ball.y = maxY-150, platform.lx=(maxX/2)-50, platform.ly=maxY-90, platform.rx=(maxX/2)+50, platform.ry=maxY-80 ;  ; )
     {
@@ -78,7 +78,7 @@ void main()
 
         testRebound(maxX,maxY);
         delay(diff);
-
+	cleardevice();
         setcolor(BLUE);
         setfillstyle(SOLID_FILL,BLUE);
         bar(platform.lx,platform.ly, platform.rx, platform.ry);
