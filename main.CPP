@@ -34,7 +34,7 @@ coordinates ball;                                    // Coordinates of ball
 
 int testX=1,testY=0;  //Test the rebound
 char ch; //input interprettor
-float diff = 10 ; //the difficulty level
+float diff = 7 ; //the difficulty level
 
 blocks  b1 = { {50,50,150,100},0 },b2,b3,b4,b5,b6,b7,b8,b9,b10;
 
@@ -69,8 +69,8 @@ void main()
 	setfillstyle(SOLID_FILL,BLUE);
 	bar(platform.lx,platform.ly, platform.rx, platform.ry);
 
-	setcolor(YELLOW);
-	setfillstyle(SOLID_FILL,YELLOW);
+	setcolor(RED);
+	setfillstyle(SOLID_FILL,RED);
 	bar(b1.blks.lx , b1.blks.ly , b1.blks.rx ,b1.blks.ry);
 	if(kbhit())
 	ch=getch();
@@ -104,9 +104,13 @@ void testRebound(int &x,int &y)
 	testX=0;
     if ( (ball.x == b1.blks.lx - 10) && (ball.y >= b1.blks.ly) && (ball.y <= b1.blks.ry) )
 	testY=1;
-    if ( (ball.y == b1.blks.ry) && (ball.x >= b1.blks.lx) && (ball.x <= b1.blks.rx ))
+    if ( (ball.y == b1.blks.ry + 10) && (ball.x >= b1.blks.lx) && (ball.x <= b1.blks.rx ))
 	testX=0;
- }
+    if( (ball.x == b1.blks.rx + 10) && (ball.y >= b1.blks.ly) && (ball.y <= b1.blks.ry))
+	testY=0;
+    if( (ball.y == b1.blks.ly - 10) && (ball.x >= b1.blks.lx) && (ball.x <= b1.blks.rx ) )
+	testX=1;
+}
 void move()
 {
     if (testX == 0) //if ball touches the top
