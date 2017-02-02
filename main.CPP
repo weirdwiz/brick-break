@@ -68,12 +68,12 @@ void main() {
      if(b[i].hitCounter==2)
      {
       setcolor(BLACK);
-      setfillstyle(SOLID_FILL, 7);
+      setfillstyle(SOLID_FILL, 8);
      }
      else if(b[i].hitCounter==1)
      {
        setcolor(BLACK);
-       setfillstyle(SOLID_FILL, 8);
+       setfillstyle(SOLID_FILL, 7);
      }
       if (b[i].hitCounter > 0)
 	bar(b[i].lx, b[i].ly, b[i].rx, b[i].ry);
