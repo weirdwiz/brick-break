@@ -14,12 +14,14 @@ A and D to control the paddle
 and bonce off the ball
 
 
-#Status
 #Implemented
-  - Bricks
-  - Mechanism of breaking of bricks
-  - Bouncing of the ball
+
+- Bricks
+ - Mechanism of breaking of bricks
+ - Bouncing of the ball
+
+
 #Pending
-  - Color Changing on breaking of bricks
-  - Scoring
+
+ - Scoring
   - Powerups
