@@ -28,8 +28,10 @@ int testX = 1, testY = 0; //Test the rebound
 char ch; //input interprettor
 int diff = 5; //the difficulty level
 
-dabbe b[5] = {
-	      { 50,50,150,100,2},{160,50,260,100,2},{270,50,370,100,2},{380,50,480,100,2},{490,50,590,100,2}
+dabbe b[10] = {
+	      { 0,0,124,20,2},{124,0,248,20,2},{248,0,392,20,2},{392,0,516,20,2},{516,0,640,20,2},
+	      { 0,60,124,80,2},{124,80,248,100,2},{248,100,392,120,2},{392,100,516,80,2},{516,80,640,60,2},
+
 	     };
 
 void main() {
@@ -61,16 +63,16 @@ void main() {
     bar(platform.lx, platform.ly, platform.rx, platform.ry);
 
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 10; i++)
     {
      if(b[i].hitCounter==2)
      {
-      setcolor(RED);
+      setcolor(BLACK);
       setfillstyle(SOLID_FILL, RED);
      }
      if(b[i].hitCounter==1)
      {
-       setcolor(BLUE);
+       setcolor(BLACK);
        setfillstyle(SOLID_FILL, BLUE);
      }
       if (b[i].hitCounter > 0)
@@ -108,7 +110,7 @@ void testRebound(int & x, int & y) {
   if (ball.y == 10)
     testX = 0;
 
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 10; i++) {
     if (b[i].hitCounter > 0)
      {
       if ((ball.x == b[i].lx - 10) && (ball.y >= b[i].ly-5) && (ball.y <= b[i].ry+5))
