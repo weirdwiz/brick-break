@@ -48,7 +48,7 @@ void main() {
   for (ball.x = x, ball.y = maxY - 150, platform.lx = (maxX/2)-50, platform.ly = maxY - 20, platform.rx = (maxX / 2) + 50, platform.ry = maxY - 10;;) {
     ch = 'h';
 
-    setbkcolor(GREEN);
+    setbkcolor(WHITE);
 
     move();
     setcolor(RED);
@@ -68,12 +68,12 @@ void main() {
      if(b[i].hitCounter==2)
      {
       setcolor(BLACK);
-      setfillstyle(SOLID_FILL, RED);
+      setfillstyle(SOLID_FILL, 7);
      }
-     if(b[i].hitCounter==1)
+     else if(b[i].hitCounter==1)
      {
        setcolor(BLACK);
-       setfillstyle(SOLID_FILL, BLUE);
+       setfillstyle(SOLID_FILL, 8);
      }
       if (b[i].hitCounter > 0)
 	bar(b[i].lx, b[i].ly, b[i].rx, b[i].ry);
