@@ -79,7 +79,7 @@ void main() {
 	bar(b[i].lx, b[i].ly, b[i].rx, b[i].ry);
     }
 
-     if (ball.x <= platform.rx + 5 && ball.x >= platform.lx - 5 && ball.y >= maxY - 30)
+     if (ball.x <= platform.rx + 10 && ball.x >= platform.lx - 10 && ball.y >= maxY - 30)
     testX = 1;
     if(ball.y==maxY+10)
      break;
@@ -113,23 +113,23 @@ void testRebound(int & x, int & y) {
   for (int i = 0; i < 10; i++) {
     if (b[i].hitCounter > 0)
      {
-      if ((ball.x == b[i].lx - 10) && (ball.y >= b[i].ly-5) && (ball.y <= b[i].ry+5))
+      if ((ball.x == b[i].lx - 10) && (ball.y >= b[i].ly-10) && (ball.y <= b[i].ry+10))
       {
 	testY = 1;       //ball touches left side
 	b[i].hitCounter--;
       }
-      if ((ball.y == b[i].ry + 10) && (ball.x >= b[i].lx-5) && (ball.x <= b[i].rx+5))
+      if ((ball.y == b[i].ry + 10) && (ball.x >= b[i].lx-10) && (ball.x <= b[i].rx+10))
       {
 	testX = 0;   //ball touches the bottom side
 	b[i].hitCounter--;
       }
-      if ((ball.x == b[i].rx + 10) && (ball.y >= b[i].ly-5) && (ball.y <= b[i].ry+5))
+      if ((ball.x == b[i].rx + 10) && (ball.y >= b[i].ly-10) && (ball.y <= b[i].ry+10))
       {
 	testY = 0; //ball touches right side
 	b[i].hitCounter--;
       }
 
-      if ((ball.y == b[i].ly - 10) && (ball.x >= b[i].lx-5) && (ball.x <= b[i].rx+5))
+      if ((ball.y == b[i].ly - 10) && (ball.x >= b[i].lx-10) && (ball.x <= b[i].rx+10))
       {
 	testX = 1; //ball touches upper side
 	b[i].hitCounter--;
