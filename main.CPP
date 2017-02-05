@@ -2,6 +2,7 @@
 #include <conio.h>
 #include <dos.h>
 #include <stdlib.h>
+#include <time.h>
 
 void testRebound(int & x, int & y);
 void move();
@@ -23,17 +24,17 @@ dabbe platform; //coordinates of bar
 
 
 coordinates ball; // Coordinates of ball
-
+int size=0;
 int testX = 1, testY = 0; //Test the rebound
 char ch; //input interprettor
-int diff = 10; //the difficulty level
+int diff = 7; //the difficulty level
 const int len=18;
 dabbe b[len] = {
 	      { 0,0,124,20,2},{124,0,248,20,2},{248,0,392,20,2},{392,0,516,20,2},{516,0,640,20,2},
 	      { 124,40,248,60,2},{ 248,60,392,80,2},{392,40,516,60,2},
 	      { 0,60,124,80,2},{124,80,248,100,2},{248,100,392,120,2},{392,80,516,100,2},{516,60,640,80,2},
-	      { 0,120,124,140,2},{124,140,248,160,2},{248,160,392,180,2},{392,140,516,160,2},{516,120,640,140,2}
-	     
+	      { 0,120,124,140,2},{124,140,248,160,2},{248,160,392,180,2},{392,140,516,160,2},{516,120,640,140,1}
+
 	     };
 
 void main() {
@@ -43,11 +44,13 @@ void main() {
   initgraph( & gd, & gm, "c://turboc3/bgi");
   clrscr();
 
+  int check1=0,check2=0,diff_time;
+  time_t start_t,end_t;
   int maxX = getmaxx() - 10;
   int maxY = getmaxy() - 10;
   int x = random(maxX - 20) + 10;
 
-  for (ball.x = x, ball.y = maxY - 150, platform.lx = (maxX/2)-50, platform.ly = maxY - 20, platform.rx = (maxX / 2) + 50, platform.ry = maxY - 10;;) {
+  for (ball.x = x, ball.y = maxY - 150, platform.lx = (maxX/2)-(50), platform.ly = maxY - 20, platform.rx = (maxX / 2) + (50) , platform.ry = maxY - 10;;) {
     ch = 'h';
 
     setbkcolor(BLACK);
@@ -62,7 +65,7 @@ void main() {
     cleardevice();
     setcolor(BLUE);
     setfillstyle(SOLID_FILL, BLUE);
-    bar(platform.lx, platform.ly, platform.rx, platform.ry);
+    bar(platform.lx-size, platform.ly, platform.rx + size, platform.ry);
 
 
     for (int i = 0; i < len; i++)
@@ -81,7 +84,7 @@ void main() {
 	bar(b[i].lx, b[i].ly, b[i].rx, b[i].ry);
     }
 
-     if (ball.x <= platform.rx + 10 && ball.x >= platform.lx - 10 && ball.y >= maxY - 30)
+     if (ball.x <= platform.rx + 10 + size && ball.x >= platform.lx - 10 - size && ball.y >= maxY - 30)
     testX = 1;
     if(ball.y==maxY-15)
      break;
@@ -98,6 +101,32 @@ void main() {
       platform.lx -= 7;
       platform.rx -= 7;
     }
+
+    if(b[17].hitCounter==0)
+     check1++;
+
+    if(check1==1)
+     {
+      check2=1;
+      time(&start_t);
+      size=50;
+     }
+     if(check2==1)
+     {
+      time(&end_t);
+      diff_time=difftime(end_t,start_t);
+       if(diff_time==15)
+       {
+	check2=0;
+	size=0;
+       }
+     }
+
+
+
+
+
+
 
   }
 
