@@ -26,12 +26,12 @@ coordinates ball; // Coordinates of ball
 
 int testX = 1, testY = 0; //Test the rebound
 char ch; //input interprettor
-int diff = 5; //the difficulty level
-
-dabbe b[10] = {
+int diff = 10; //the difficulty level
+const int len=15;
+dabbe b[len] = {
 	      { 0,0,124,20,2},{124,0,248,20,2},{248,0,392,20,2},{392,0,516,20,2},{516,0,640,20,2},
 	      { 0,60,124,80,2},{124,80,248,100,2},{248,100,392,120,2},{392,80,516,100,2},{516,60,640,80,2},
-
+	      { 0,120,124,140,2},{124,140,248,160,2},{248,160,392,180,2},{392,140,516,160,2},{516,120,640,140,2},
 	     };
 
 void main() {
@@ -48,7 +48,7 @@ void main() {
   for (ball.x = x, ball.y = maxY - 150, platform.lx = (maxX/2)-50, platform.ly = maxY - 20, platform.rx = (maxX / 2) + 50, platform.ry = maxY - 10;;) {
     ch = 'h';
 
-    setbkcolor(WHITE);
+    setbkcolor(BLACK);
 
     move();
     setcolor(RED);
@@ -63,7 +63,7 @@ void main() {
     bar(platform.lx, platform.ly, platform.rx, platform.ry);
 
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < len; i++)
     {
      if(b[i].hitCounter==2)
      {
@@ -90,11 +90,11 @@ void main() {
       break;
 
     else if (ch == 100) {
-      platform.lx += 5;
-      platform.rx += 5;
+      platform.lx += 7;
+      platform.rx += 7;
     } else if (ch == 97) {
-      platform.lx -= 5;
-      platform.rx -= 5;
+      platform.lx -= 7;
+      platform.rx -= 7;
     }
 
   }
@@ -110,7 +110,7 @@ void testRebound(int & x, int & y) {
   if (ball.y == 10)
     testX = 0;
 
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < len; i++) {
     if (b[i].hitCounter > 0)
      {
       if ((ball.x == b[i].lx - 10) && (ball.y >= b[i].ly-10) && (ball.y <= b[i].ry+10))
