@@ -3,7 +3,7 @@
 #include <dos.h>
 #include <stdlib.h>
 
- void testRebound(int & x, int & y);
+void testRebound(int & x, int & y);
 void move();
 
 struct coordinates {
