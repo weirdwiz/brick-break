@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
+#include <iostream.h>
 void testRebound(int & x, int & y);
 void move();
 
@@ -26,6 +27,7 @@ dabbe platform; //coordinates of bar
 coordinates ball; // Coordinates of ball
 int score=0;
 int size=0;
+int balls=10;
 int testX = 1, testY = 0; //Test the rebound
 char ch; //input interprettor
 int diff = 20; //the difficulty level
@@ -46,11 +48,12 @@ void main() {
   initgraph( & gd, & gm, "c://turboc3/bgi");
   clrscr();
 
+  int inpu,inpu1,inpu2;
   int check1=0,check2=0,check1_ball=0,check2_ball=0,diff_time,diff_ball_time,check1_bar=0,check2_bar=0,diff_bar_time,speed=0;
   time_t start_t,end_t,start_ball_t,end_ball_t,start_bar_t,end_bar_t;
   char scoreBoard[50];
-  int maxX = getmaxx() - 10;
-  int maxY = getmaxy() - 10;
+  int maxX = getmaxx() - balls;
+  int maxY = getmaxy() - balls;
   int x = random(maxX - 20) + 10;
 
   for (ball.x = x, ball.y = maxY - 150, platform.lx = (maxX/2)-(50), platform.ly = maxY - 20, platform.rx = (maxX / 2) + (50) , platform.ry = maxY - 10;;)
@@ -62,7 +65,7 @@ void main() {
     move();
     setcolor(RED);
     setfillstyle(SOLID_FILL, RED);
-    fillellipse(ball.x, ball.y, 10, 10);
+    fillellipse(ball.x, ball.y, balls, balls);
 
     testRebound(maxX, maxY);
     delay(diff);
@@ -108,14 +111,14 @@ void main() {
      else if(b[i].hitCounter==1)
      {
 	setcolor(BLACK);
-	setfillstyle(SOLID_FILL,13);
+	setfillstyle(SOLID_FILL,14);
 	 }
       if (b[i].hitCounter > 0)
 	bar(b[i].lx, b[i].ly, b[i].rx, b[i].ry);
 	 }
    }
 
-     if (ball.x <= platform.rx + 10 + size && ball.x >= platform.lx - 10 - size && ball.y >= maxY - 30)
+     if (ball.x <= platform.rx + balls + size && ball.x >= platform.lx - balls - size && ball.y >= maxY - (20+balls))
      testX = 1;
 
     if(ball.y>=maxY-15)
@@ -125,6 +128,36 @@ void main() {
       ch = getch();
     if (ch == 'e')
       break;
+    if(ch=='s')
+     {
+	   cout<<"1.difficulty"<<endl<<"2.ballsize";
+	   cin>>inpu;
+	     if(inpu==1)
+	      {
+		   cout<<"1.easy"<<endl<<"2.medium"<<endl<<"3.pro"<<endl<<"4.god";
+		   cin>>inpu1;
+		    if(inpu1==1)
+		     diff=20;
+		    else if(inpu1==2)
+		     diff=15;
+		    else if(inpu1==3)
+		     diff=10;
+		    else
+		     diff=3;
+	  }
+	 else
+		 {
+			cout<<"1.big"<<endl<<"2.mid"<<endl<<"3.small";
+			cin>>inpu2;
+			 if(inpu2==1)
+			  balls=15;
+			  else if(inpu2==2)
+			   balls=10;
+			  else
+			    balls=5;
+		  }
+	 }
+
 
     else if (ch == 100) {
       platform.lx += (7+speed);
@@ -210,15 +243,15 @@ void main() {
 void testRebound(int & x, int & y) {
   if (ball.x == x||ball.x==x-1||ball.x==x+1)
     testY = 1;
-  else if (ball.x == 10||ball.x==11||ball.x==9)
+  else if (ball.x == balls||ball.x==balls+1||ball.x==balls-1)
     testY = 0;
-  if (ball.y == 10||ball.y==11||ball.x==9)
+  if (ball.y == 10||ball.y==balls+1||ball.x==balls-1)
     testX = 0;
 
   for (int i = 0; i < len; i++) {
     if (b[i].hitCounter > 0)
      {
-      if ((ball.x == b[i].lx - 10||ball.x == b[i].lx - 11 ||ball.x == b[i].lx - 9) && (ball.y >= b[i].ly-10) && (ball.y <= b[i].ry+10))
+      if ((ball.x == b[i].lx - balls ||ball.x == b[i].lx - (balls + 1) ||ball.x == b[i].lx - (balls-1)) && (ball.y >= b[i].ly-balls) && (ball.y <= b[i].ry + balls))
       {
 	testY = 1;       //ball touches left side
 	b[i].hitCounter--;
@@ -228,7 +261,7 @@ void testRebound(int & x, int & y) {
 	  endGame--;
 	}
       }
-      if ((ball.y == b[i].ry + 10||ball.y == b[i].ry + 11 ||ball.y == b[i].ry + 9) && (ball.x >= b[i].lx-10) && (ball.x <= b[i].rx+10))
+      if ((ball.y == b[i].ry + balls ||ball.y == b[i].ry + (balls+1) ||ball.y == b[i].ry + (balls-1)) && (ball.x >= b[i].lx-balls) && (ball.x <= b[i].rx+balls))
       {
 	testX = 0;   //ball touches the bottom side
 	b[i].hitCounter--;
@@ -238,7 +271,7 @@ void testRebound(int & x, int & y) {
 	  endGame--;
 	}
       }
-      if ((ball.x == b[i].rx + 10||ball.x == b[i].rx + 11 ||ball.x == b[i].rx + 9 ) && (ball.y >= b[i].ly-10) && (ball.y <= b[i].ry+10))
+      if ((ball.x == b[i].rx + balls||ball.x == b[i].rx + balls + 1 ||ball.x == b[i].rx + balls-1 ) && (ball.y >= b[i].ly-balls) && (ball.y <= b[i].ry + balls))
       {
 	testY = 0; //ball touches right side
 	b[i].hitCounter--;
@@ -249,7 +282,7 @@ void testRebound(int & x, int & y) {
 	}
       }
 
-      if ((ball.y == b[i].ly - 10||ball.y == b[i].ly - 11 ||ball.y == b[i].ly - 9) && (ball.x >= b[i].lx-10) && (ball.x <= b[i].rx+10))
+      if ((ball.y == b[i].ly - balls||ball.y == b[i].ly - (balls+1)||ball.y == b[i].ly - (balls-1)) && (ball.x >= b[i].lx-balls) && (ball.x <= b[i].rx+balls))
       {
 	testX = 1; //ball touches upper side
 	b[i].hitCounter--;
