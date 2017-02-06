@@ -3,7 +3,7 @@
 #include <dos.h>
 #include <stdlib.h>
 #include <time.h>
-
+#include <stdio.h>
 void testRebound(int & x, int & y);
 void move();
 
@@ -24,15 +24,13 @@ dabbe platform; //coordinates of bar
 
 
 coordinates ball; // Coordinates of ball
-
-
+int score=0;
+int size=0;
+int testX = 1, testY = 0; //Test the rebound
+char ch; //input interprettor
+int diff = 20; //the difficulty level
 const int len=21;
-int score = 0;
-int size = 0;
-int testX = 1, testY = 0; // Test the rebound
-char ch;                  // input interprettor
-int diff = 5;            // the difficulty level
-int endGame = len;
+int endGame=len;
 dabbe b[len] = {
 	      { 0,0,124,20,2},{124,0,248,20,2},{248,0,392,20,2},{392,0,516,20,2},{516,0,640,20,2},
 	      { 124,40,248,60,2},{ 248,60,392,80,2},{392,40,516,60,2},
@@ -50,6 +48,7 @@ void main() {
 
   int check1=0,check2=0,check1_ball=0,check2_ball=0,diff_time,diff_ball_time,check1_bar=0,check2_bar=0,diff_bar_time,speed=0;
   time_t start_t,end_t,start_ball_t,end_ball_t,start_bar_t,end_bar_t;
+  char scoreBoard[50];
   int maxX = getmaxx() - 10;
   int maxY = getmaxy() - 10;
   int x = random(maxX - 20) + 10;
@@ -71,11 +70,11 @@ void main() {
     setcolor(BLUE);
     setfillstyle(SOLID_FILL, BLUE);
     bar(platform.lx-size, platform.ly, platform.rx + size, platform.ry);
-
     setcolor(WHITE);
     settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
     sprintf(scoreBoard, "Score : %d", score);
     outtextxy(maxX - 200, maxY - 150, scoreBoard);
+
   for (int i = 0; i < len; i++)
    {
      if(i!=19&&i!=18&&i!=20)
@@ -93,10 +92,6 @@ void main() {
      }
       if (b[i].hitCounter > 0)
 	bar(b[i].lx, b[i].ly, b[i].rx, b[i].ry);
-
-
-
-
     }
     else
      {
@@ -165,7 +160,6 @@ void main() {
     if(check1_ball==1)
      {
       check2_ball=1;
-
       time(&start_ball_t);
       diff+=10;
      }
@@ -199,10 +193,17 @@ void main() {
 	     speed=0;
        }
      }
-    if (endGame == 0)
-      break;
+     if (endGame==0)
+	break;
   }
-
+  clrscr();
+  settextstyle(DEFAULT_FONT, HORIZ_DIR, 5);
+  if (endGame == 0)
+    outtextxy((maxX / 2) - 200, (maxY / 2), "You Win! :)");
+  else
+    outtextxy((maxX / 2) - 250, (maxY / 2), "You Lose! :(");
+  outtextxy((maxX / 2) - 250, (maxY / 2) - 50, scoreBoard);
+  getch();
   closegraph();
 }
 
@@ -215,50 +216,49 @@ void testRebound(int & x, int & y) {
     testX = 0;
 
   for (int i = 0; i < len; i++) {
-    if (b[i].hitCounter > 0) {
-      if ((ball.x == b[i].lx - 10 || ball.x == b[i].lx - 11) &&
-	  (ball.y >= b[i].ly - 10) && (ball.y <= b[i].ry + 10)) {
-	testY = 1; // ball touches left side
+    if (b[i].hitCounter > 0)
+     {
+      if ((ball.x == b[i].lx - 10||ball.x == b[i].lx - 11 ||ball.x == b[i].lx - 9) && (ball.y >= b[i].ly-10) && (ball.y <= b[i].ry+10))
+      {
+	testY = 1;       //ball touches left side
 	b[i].hitCounter--;
-	score += 50;
-	if (b[i].hitCounter == 0)
+  if (b[i].hitCounter == 0)
 	{
 	  score += 50;
 	  endGame--;
 	}
       }
-      if ((ball.y == b[i].ry + 10 || ball.y == b[i].ry + 11) &&
-	  (ball.x >= b[i].lx - 10) && (ball.x <= b[i].rx + 10)) {
-	testX = 0; // ball touches the bottom side
+      if ((ball.y == b[i].ry + 10||ball.y == b[i].ry + 11 ||ball.y == b[i].ry + 9) && (ball.x >= b[i].lx-10) && (ball.x <= b[i].rx+10))
+      {
+	testX = 0;   //ball touches the bottom side
 	b[i].hitCounter--;
-	if (b[i].hitCounter == 0)
+  if (b[i].hitCounter == 0)
 	{
-	    endGame--;
 	  score += 50;
-	}
-      }
-      if ((ball.x == b[i].rx + 10 || ball.x == b[i].rx + 11) &&
-	  (ball.y >= b[i].ly - 10) && (ball.y <= b[i].ry + 10)) {
-	testY = 0; // ball touches right side
-	b[i].hitCounter--;
-	if (b[i].hitCounter == 0)
-	{
 	  endGame--;
+	}
+      }
+      if ((ball.x == b[i].rx + 10||ball.x == b[i].rx + 11 ||ball.x == b[i].rx + 9 ) && (ball.y >= b[i].ly-10) && (ball.y <= b[i].ry+10))
+      {
+	testY = 0; //ball touches right side
+	b[i].hitCounter--;
+  if (b[i].hitCounter == 0)
+	{
 	  score += 50;
+	  endGame--;
 	}
       }
 
-      if ((ball.y == b[i].ly - 10 || ball.y == b[i].ly - 11) &&
-	  (ball.x >= b[i].lx - 10) && (ball.x <= b[i].rx + 10)) {
-	testX = 1; // ball touches upper side
+      if ((ball.y == b[i].ly - 10||ball.y == b[i].ly - 11 ||ball.y == b[i].ly - 9) && (ball.x >= b[i].lx-10) && (ball.x <= b[i].rx+10))
+      {
+	testX = 1; //ball touches upper side
 	b[i].hitCounter--;
-	if (b[i].hitCounter == 0)
+  if (b[i].hitCounter == 0)
 	{
-	    endGame--;
-	    score += 50;
+	  score += 50;
+	  endGame--;
 	}
-
-     }
+      }
     }
   }
 
