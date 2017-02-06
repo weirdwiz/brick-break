@@ -17,11 +17,7 @@ and bonce off the ball
 #Implemented
 
 - Bricks
- - Mechanism of breaking of bricks
- - Bouncing of the ball
-
-
-#Pending
-
- - Scoring
-  - Powerups
+- Mechanism of breaking of bricks
+- Bouncing of the ball
+- Scoring
+ - Powerups
