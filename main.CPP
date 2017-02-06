@@ -72,7 +72,10 @@ void main() {
     setfillstyle(SOLID_FILL, BLUE);
     bar(platform.lx-size, platform.ly, platform.rx + size, platform.ry);
 
-
+    setcolor(WHITE);
+    settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
+    sprintf(scoreBoard, "Score : %d", score);
+    outtextxy(maxX - 200, maxY - 150, scoreBoard);
   for (int i = 0; i < len; i++)
    {
      if(i!=19&&i!=18&&i!=20)
@@ -90,13 +93,10 @@ void main() {
      }
       if (b[i].hitCounter > 0)
 	bar(b[i].lx, b[i].ly, b[i].rx, b[i].ry);
-     
 
-    setcolor(WHITE);
-    settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
-    sprintf(scoreBoard, "Score : %d", score);
-    outtextxy(maxX - 200, maxY - 150, scoreBoard);
-    
+
+
+
     }
     else
      {
@@ -165,7 +165,7 @@ void main() {
     if(check1_ball==1)
      {
       check2_ball=1;
-    
+
       time(&start_ball_t);
       diff+=10;
      }
