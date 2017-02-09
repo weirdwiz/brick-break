@@ -72,7 +72,9 @@ void main() {
     cleardevice();
     setcolor(BLUE);
     setfillstyle(SOLID_FILL, BLUE);
-    bar(platform.lx-size, platform.ly, platform.rx + size, platform.ry);
+    platform.lx-=size;
+    platform.rx+=size; 
+    bar(platform.lx, platform.ly, platform.rx, platform.ry);
     setcolor(WHITE);
     settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
     sprintf(scoreBoard, "Score : %d", score);
@@ -226,8 +228,21 @@ void main() {
 	     speed=0;
        }
      }
-     if (endGame==0)
+    
+    if (endGame==0)
 	break;
+
+	if(platform.lx<=0 && platform.rx<=0)
+	{
+		platform.lx=maxX+balls-100;
+		platform.rx=maxX+balls;
+	}
+	if(platform.rx>=maxX+balls&&platform.lx>=maxX+balls)
+	{
+		platform.rx=100;
+		platform.lx=0;
+	}
+
   }
   clrscr();
   settextstyle(DEFAULT_FONT, HORIZ_DIR, 5);
