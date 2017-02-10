@@ -48,7 +48,7 @@ int main() {
   initgraph(&gd, &gm, "c://turboc3/bgi");
   cleardevice();
 
-  int inpu, inpu1, inpu2;
+  int inpu, inpu1, inpu2,inpu3;
   int check1 = 0, check2 = 0, check1_ball = 0, check2_ball = 0, diff_time,
       diff_ball_time, check1_bar = 0, check2_bar = 0, diff_bar_time, speed = 0;
   time_t start_t, end_t, start_ball_t, end_ball_t, start_bar_t, end_bar_t;
@@ -62,7 +62,7 @@ int main() {
     outtextxy((maxX / 2) - 300, (maxY / 2 - 100), "BRICK BREAKER");
     settextstyle(DEFAULT_FONT, HORIZ_DIR, 1);
     outtextxy((maxX / 2) - 300, (maxY / 2 + 20),
-              "Press Enter to start        Controls: A for left D for right ");
+	      "Press Enter to start        Controls: A for left D for right ");
     outtextxy((maxX / 2) - 300, (maxY / 2 + 40), "Press Esc to exit");
     outtextxy((maxX / 2) - 300, (maxY / 2 + 60), "Press S for settings");
     if (kbhit())
@@ -72,31 +72,38 @@ int main() {
     if (ch == 27)
       return 0;
     if (ch == 's') {
-      cout << "1.    difficulty" << endl << "2.    ballsize\n";
+      cout << "1.    difficulty" << endl << "2.    ballsize\n"<<"3.    theme";
       cin >> inpu;
       if (inpu == 1) {
-        cout << "1.     easy" << endl
-             << "2.     medium" << endl
-             << "3.     pro" << endl
-             << "4.   god\n";
-        cin >> inpu1;
-        if (inpu1 == 1)
-          diff = 20;
-        else if (inpu1 == 2)
-          diff = 15;
-        else if (inpu1 == 3)
-          diff = 10;
-        else
-          diff = 3;
-      } else {
-        cout << "1.    big" << endl << "2.    mid" << endl << "3.     small\n";
-        cin >> inpu2;
-        if (inpu2 == 1)
-          balls = 15;
-        else if (inpu2 == 2)
-          balls = 10;
-        else
-          balls = 5;
+	cout << "1.     easy" << endl
+	     << "2.     medium" << endl
+	     << "3.     pro" << endl
+	     << "4.     god\n";
+	cin >> inpu1;
+	if (inpu1 == 1)
+	  diff = 20;
+	else if (inpu1 == 2)
+	  diff = 15;
+	else if (inpu1 == 3)
+	  diff = 10;
+	else
+	  diff = 3;
+      }
+      else if(inpu==2)
+       {
+	cout << "1.    big" << endl << "2.    mid" << endl << "3.    dsmall\n";
+	cin >> inpu2;
+	if (inpu2 == 1)
+	  balls = 15;
+	else if (inpu2 == 2)
+	  balls = 10;
+	else
+	  balls = 5;
+      }
+      else
+      {
+       cout<<"1.    dark"<<endl<<"2.    light";
+       cin>>inpu3;
       }
       cleardevice();
     }
@@ -107,9 +114,15 @@ int main() {
       platform.ry = maxY - 10;
        ;) {
     ch = 'h';
-
-    setbkcolor(GREEN);
-
+   if(inpu3==1)
+   {
+    setbkcolor(0);
+    setcolor(WHITE);
+    rectangle(0,0,1,maxY);
+    rectangle(maxX+9,0,maxX+10,maxY);
+   }
+   else
+   setbkcolor(GREEN);
     move();
     setcolor(RED);
     setfillstyle(SOLID_FILL, RED);
@@ -130,33 +143,33 @@ int main() {
 
     for (int i = 0; i < len; i++) {
       if (i != 19 && i != 18 && i != 20) {
-        if (b[i].hitCounter == 2) {
-          setcolor(BLACK);
-          setfillstyle(SOLID_FILL, 8);
-        } else if (b[i].hitCounter == 1) {
-          setcolor(BLACK);
-          setfillstyle(SOLID_FILL, 7);
-        }
-        if (b[i].hitCounter > 0)
-          bar(b[i].lx, b[i].ly, b[i].rx, b[i].ry);
+	if (b[i].hitCounter == 2) {
+	  setcolor(BLACK);
+	  setfillstyle(SOLID_FILL, 8);
+	} else if (b[i].hitCounter == 1) {
+	  setcolor(BLACK);
+	  setfillstyle(SOLID_FILL, 7);
+	}
+	if (b[i].hitCounter > 0)
+	  bar(b[i].lx, b[i].ly, b[i].rx, b[i].ry);
       } else {
-        if (b[i].hitCounter == 3) {
-          setcolor(BLACK);
-          setfillstyle(SOLID_FILL, 12);
-        } else if (b[i].hitCounter == 2) {
-          setcolor(BLACK);
-          setfillstyle(SOLID_FILL, 13);
-        } else if (b[i].hitCounter == 1) {
-          setcolor(BLACK);
-          setfillstyle(SOLID_FILL, 14);
-        }
-        if (b[i].hitCounter > 0)
-          bar(b[i].lx, b[i].ly, b[i].rx, b[i].ry);
+	if (b[i].hitCounter == 3) {
+	  setcolor(BLACK);
+	  setfillstyle(SOLID_FILL, 12);
+	} else if (b[i].hitCounter == 2) {
+	  setcolor(BLACK);
+	  setfillstyle(SOLID_FILL, 13);
+	} else if (b[i].hitCounter == 1) {
+	  setcolor(BLACK);
+	  setfillstyle(SOLID_FILL, 14);
+	}
+	if (b[i].hitCounter > 0)
+	  bar(b[i].lx, b[i].ly, b[i].rx, b[i].ry);
       }
     }
 
     if (ball.x <= platform.rx + balls + size &&
-        ball.x >= platform.lx - balls - size && ball.y >= maxY - (20 + balls))
+	ball.x >= platform.lx - balls - size && ball.y >= maxY - (20 + balls))
       testX = 1;
 
     if (ball.y >= maxY - 15)
