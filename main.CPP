@@ -5,15 +5,18 @@
 #include <time.h>
 #include <stdio.h>
 #include <iostream.h>
+
 void testRebound(int& x, int& y);
 void move();
 
-struct coordinates {
+class coordinates {
+  public:
   int x;
   int y;
 };
 
-struct dabbe {
+class block {
+  public:
   int lx;
   int ly;
   int rx;
@@ -21,7 +24,7 @@ struct dabbe {
   int hitCounter;
 };
 
-dabbe platform;  // coordinates of bar
+block platform;  // coordinates of bar
 
 coordinates ball;  // Coordinates of ball
 int score = 0;
@@ -32,14 +35,15 @@ char ch;  // input interprettor
 int diff = 20;  // the difficulty level
 const int len = 21;
 int endGame = len;
-dabbe b[len] = {
+block b[len] = {
     {0, 0, 124, 20, 2},      {124, 0, 248, 20, 2},    {248, 0, 392, 20, 2},
     {392, 0, 516, 20, 2},    {516, 0, 640, 20, 2},    {124, 40, 248, 60, 2},
     {248, 60, 392, 80, 2},   {392, 40, 516, 60, 2},   {0, 60, 124, 80, 2},
     {124, 80, 248, 100, 2},  {248, 100, 392, 120, 2}, {392, 80, 516, 100, 2},
     {516, 60, 640, 80, 2},   {0, 120, 124, 140, 2},   {124, 140, 248, 160, 2},
     {248, 160, 392, 180, 2}, {392, 140, 516, 160, 2}, {516, 120, 640, 140, 2},
-    {124, 60, 248, 80, 3},   {248, 80, 392, 100, 3},  {392, 60, 516, 80, 3}};
+    {124, 60, 248, 80, 3},   {248, 80, 392, 100, 3},  {392, 60, 516, 80, 3}
+  };
 
 int main() {
   randomize();
@@ -50,8 +54,8 @@ int main() {
 
   int inpu, inpu1, inpu2,inpu3;
   int check1 = 0, check2 = 0, check1_ball = 0, check2_ball = 0, diff_time,
-      diff_ball_time, check1_bar = 0, check2_bar = 0, diff_bar_time, speed = 0;
-  time_t start_t, end_t, start_ball_t, end_ball_t, start_bar_t, end_bar_t;
+      diff_ball_time, check1_bar = 0, check2_bar = 0, diff_bar_time, speed = 0,
+  time_t ,start_t, end_t, start_ball_t, end_ball_t, start_bar_t, end_bar_t;
   char scoreBoard[50];
   int maxX = getmaxx() - balls;
   int maxY = getmaxy() - balls;
