@@ -1,17 +1,17 @@
 # Brick Breaker
 A simple brick breaker game made by C++98 for final project C++ CBSE examinations 2017-2018
-###Setup
+### Setup
  - clone the repository
  - modify the bgi driver path according to your system
  - turbo C++ to compile the files 
 
-###Details
+### Details
 Break the bricks and WIN!
 
-###Controls
+### Controls
 A and D to control the paddle and bonce off the ball
 <!-- 
-###Implemented
+### Implemented
 
 - Bricks
 - Mechanism of breaking of bricks
