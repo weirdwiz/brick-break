@@ -1,23 +1,17 @@
-#include <graphics.h>
-#include <conio.h>
-#include <dos.h>
-#include <stdlib.h>
-#include <time.h>
-#include <stdio.h>
-#include <fstream.h>
-void leaderboard(int score);
-void testRebound(int& x, int& y);
+#
+include < graphics.h > #include < conio.h > #include < dos.h > #include < stdlib.h > #include < time.h > #include < stdio.h > #include < fstream.h >
+  void leaderboard(int score);
+void testRebound(int & x, int & y);
 void move();
 void print_leaderboard();
 struct coordinates {
   int x;
   int y;
 };
-class leader
-{
-public:
-char leader_name[50];
-int leader_score;
+class leader {
+  public:
+    char leader_name[50];
+  int leader_score;
 };
 
 leader lead;
@@ -30,36 +24,177 @@ struct dabbe {
   int hitCounter;
 };
 
-dabbe platform;  // coordinates of bar
+dabbe platform; // coordinates of bar
 
-coordinates ball;  // Coordinates of ball
+coordinates ball; // Coordinates of ball
 int score = 0;
 int size = 0;
 int balls = 10;
-int testX = 1, testY = 0;  // Test the rebound
-char ch;  // input interprettor
-int diff = 20;  // the difficulty level
+int testX = 1, testY = 0; // Test the rebound
+char ch; // input interprettor
+int diff = 20; // the difficulty level
 const int len = 21;
 int endGame = len;
 dabbe b[len] = {
-    {0, 0, 124, 20, 2},      {124, 0, 248, 20, 2},    {248, 0, 392, 20, 2},
-    {392, 0, 516, 20, 2},    {516, 0, 640, 20, 2},    {124, 40, 248, 60, 2},
-    {248, 60, 392, 80, 2},   {392, 40, 516, 60, 2},   {0, 60, 124, 80, 2},
-    {124, 80, 248, 100, 2},  {248, 100, 392, 120, 2}, {392, 80, 516, 100, 2},
-    {516, 60, 640, 80, 2},   {0, 120, 124, 140, 2},   {124, 140, 248, 160, 2},
-    {248, 160, 392, 180, 2}, {392, 140, 516, 160, 2}, {516, 120, 640, 140, 2},
-    {124, 60, 248, 80, 3},   {248, 80, 392, 100, 3},  {392, 60, 516, 80, 3}};
+  {
+    0,
+    0,
+    124,
+    20,
+    2
+  },
+  {
+    124,
+    0,
+    248,
+    20,
+    2
+  },
+  {
+    248,
+    0,
+    392,
+    20,
+    2
+  },
+  {
+    392,
+    0,
+    516,
+    20,
+    2
+  },
+  {
+    516,
+    0,
+    640,
+    20,
+    2
+  },
+  {
+    124,
+    40,
+    248,
+    60,
+    2
+  },
+  {
+    248,
+    60,
+    392,
+    80,
+    2
+  },
+  {
+    392,
+    40,
+    516,
+    60,
+    2
+  },
+  {
+    0,
+    60,
+    124,
+    80,
+    2
+  },
+  {
+    124,
+    80,
+    248,
+    100,
+    2
+  },
+  {
+    248,
+    100,
+    392,
+    120,
+    2
+  },
+  {
+    392,
+    80,
+    516,
+    100,
+    2
+  },
+  {
+    516,
+    60,
+    640,
+    80,
+    2
+  },
+  {
+    0,
+    120,
+    124,
+    140,
+    2
+  },
+  {
+    124,
+    140,
+    248,
+    160,
+    2
+  },
+  {
+    248,
+    160,
+    392,
+    180,
+    2
+  },
+  {
+    392,
+    140,
+    516,
+    160,
+    2
+  },
+  {
+    516,
+    120,
+    640,
+    140,
+    2
+  },
+  {
+    124,
+    60,
+    248,
+    80,
+    3
+  },
+  {
+    248,
+    80,
+    392,
+    100,
+    3
+  },
+  {
+    392,
+    60,
+    516,
+    80,
+    3
+  }
+};
 
 int main() {
   randomize();
 
   int gd = DETECT, gm;
-  initgraph(&gd, &gm, "c://turboc3/bgi");
+  initgraph( & gd, & gm, "c://turboc3/bgi");
   cleardevice();
 
-  int inpu, inpu1, inpu2,inpu3;
+  int inpu, inpu1, inpu2, inpu3;
   int check1 = 0, check2 = 0, check1_ball = 0, check2_ball = 0, diff_time,
-      diff_ball_time, check1_bar = 0, check2_bar = 0, diff_bar_time, speed = 0;
+    diff_ball_time, check1_bar = 0, check2_bar = 0, diff_bar_time, speed = 0;
   time_t start_t, end_t, start_ball_t, end_ball_t, start_bar_t, end_bar_t;
   char scoreBoard[50];
   int maxX = getmaxx() - balls;
@@ -71,7 +206,7 @@ int main() {
     outtextxy((maxX / 2) - 300, (maxY / 2 - 100), "BRICK BREAKER");
     settextstyle(DEFAULT_FONT, HORIZ_DIR, 1);
     outtextxy((maxX / 2) - 300, (maxY / 2 + 20),
-	      "Press Enter to start        Controls: A for left D for right ");
+      "Press Enter to start        Controls: A for left D for right ");
     outtextxy((maxX / 2) - 300, (maxY / 2 + 40), "Press Esc to exit");
     outtextxy((maxX / 2) - 300, (maxY / 2 + 60), "Press S for settings\nPress L for Leaderboard");
     if (kbhit())
@@ -83,57 +218,47 @@ int main() {
     if (ch == 'l')
       print_leaderboard();
     if (ch == 's') {
-      cout << "1.    difficulty" << endl << "2.    ballsize\n"<<"3.    theme";
+      cout << "1.    difficulty" << endl << "2.    ballsize\n" << "3.    theme";
       cin >> inpu;
       if (inpu == 1) {
-	cout << "1.     easy" << endl
-	     << "2.     medium" << endl
-	     << "3.     pro" << endl
-	     << "4.     god\n";
-	cin >> inpu1;
-	if (inpu1 == 1)
-	  diff = 20;
-	else if (inpu1 == 2)
-	  diff = 15;
-	else if (inpu1 == 3)
-	  diff = 10;
-	else
-	  diff = 3;
-      }
-      else if(inpu==2)
-       {
-	cout << "1.    big" << endl << "2.    mid" << endl << "3.    dsmall\n";
-	cin >> inpu2;
-	if (inpu2 == 1)
-	  balls = 15;
-	else if (inpu2 == 2)
-	  balls = 10;
-	else
-	  balls = 5;
-      }
-      else
-      {
-       cout<<"1.    dark"<<endl<<"2.    light";
-       cin>>inpu3;
+        cout << "1.     easy" << endl << "2.     medium" << endl << "3.     pro" << endl << "4.     god\n";
+        cin >> inpu1;
+        if (inpu1 == 1)
+          diff = 20;
+        else if (inpu1 == 2)
+          diff = 15;
+        else if (inpu1 == 3)
+          diff = 10;
+        else
+          diff = 3;
+      } else if (inpu == 2) {
+        cout << "1.    big" << endl << "2.    mid" << endl << "3.    dsmall\n";
+        cin >> inpu2;
+        if (inpu2 == 1)
+          balls = 15;
+        else if (inpu2 == 2)
+          balls = 10;
+        else
+          balls = 5;
+      } else {
+        cout << "1.    dark" << endl << "2.    light";
+        cin >> inpu3;
       }
       cleardevice();
     }
     ch = '0';
   }
   for (ball.x = x, ball.y = maxY - 150, platform.lx = (maxX / 2) - (50),
-      platform.ly = maxY - 20, platform.rx = (maxX / 2) + (50),
-      platform.ry = maxY - 10;
-       ;) {
+    platform.ly = maxY - 20, platform.rx = (maxX / 2) + (50),
+    platform.ry = maxY - 10;;) {
     ch = 'h';
-   if(inpu3==1)
-   {
-    setbkcolor(0);
-    setcolor(WHITE);
-    rectangle(0,0,1,maxY);
-    rectangle(maxX+9,0,maxX+10,maxY);
-   }
-   else
-   setbkcolor(GREEN);
+    if (inpu3 == 1) {
+      setbkcolor(0);
+      setcolor(WHITE);
+      rectangle(0, 0, 1, maxY);
+      rectangle(maxX + 9, 0, maxX + 10, maxY);
+    } else
+      setbkcolor(GREEN);
     move();
     setcolor(RED);
     setfillstyle(SOLID_FILL, RED);
@@ -144,9 +269,9 @@ int main() {
     cleardevice();
     setcolor(BLUE);
     setfillstyle(SOLID_FILL, BLUE);
-   // platform.lx -= size;
-   // platform.rx += size;
-    bar(platform.lx-size, platform.ly, platform.rx+size, platform.ry);
+    // platform.lx -= size;
+    // platform.rx += size;
+    bar(platform.lx - size, platform.ly, platform.rx + size, platform.ry);
     setcolor(WHITE);
     settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
     sprintf(scoreBoard, "Score : %d", score);
@@ -154,33 +279,33 @@ int main() {
 
     for (int i = 0; i < len; i++) {
       if (i != 19 && i != 18 && i != 20) {
-	if (b[i].hitCounter == 2) {
-	  setcolor(BLACK);
-	  setfillstyle(SOLID_FILL, 8);
-	} else if (b[i].hitCounter == 1) {
-	  setcolor(BLACK);
-	  setfillstyle(SOLID_FILL, 7);
-	}
-	if (b[i].hitCounter > 0)
-	  bar(b[i].lx, b[i].ly, b[i].rx, b[i].ry);
+        if (b[i].hitCounter == 2) {
+          setcolor(BLACK);
+          setfillstyle(SOLID_FILL, 8);
+        } else if (b[i].hitCounter == 1) {
+          setcolor(BLACK);
+          setfillstyle(SOLID_FILL, 7);
+        }
+        if (b[i].hitCounter > 0)
+          bar(b[i].lx, b[i].ly, b[i].rx, b[i].ry);
       } else {
-	if (b[i].hitCounter == 3) {
-	  setcolor(BLACK);
-	  setfillstyle(SOLID_FILL, 12);
-	} else if (b[i].hitCounter == 2) {
-	  setcolor(BLACK);
-	  setfillstyle(SOLID_FILL, 13);
-	} else if (b[i].hitCounter == 1) {
-	  setcolor(BLACK);
-	  setfillstyle(SOLID_FILL, 14);
-	}
-	if (b[i].hitCounter > 0)
-	  bar(b[i].lx, b[i].ly, b[i].rx, b[i].ry);
+        if (b[i].hitCounter == 3) {
+          setcolor(BLACK);
+          setfillstyle(SOLID_FILL, 12);
+        } else if (b[i].hitCounter == 2) {
+          setcolor(BLACK);
+          setfillstyle(SOLID_FILL, 13);
+        } else if (b[i].hitCounter == 1) {
+          setcolor(BLACK);
+          setfillstyle(SOLID_FILL, 14);
+        }
+        if (b[i].hitCounter > 0)
+          bar(b[i].lx, b[i].ly, b[i].rx, b[i].ry);
       }
     }
 
     if (ball.x <= platform.rx + balls + size &&
-	ball.x >= platform.lx - balls - size && ball.y >= maxY - (20 + balls))
+      ball.x >= platform.lx - balls - size && ball.y >= maxY - (20 + balls))
       testX = 1;
 
     if (ball.y >= maxY - 15)
@@ -204,15 +329,15 @@ int main() {
 
     if (check1 == 1) {
       check2 = 1;
-      time(&start_t);
+      time( & start_t);
       size = 50;
     }
     if (check2 == 1) {
-      time(&end_t);
+      time( & end_t);
       diff_time = difftime(end_t, start_t);
       if (diff_time == 15) {
-	check2 = 0;
-	size = 0;
+        check2 = 0;
+        size = 0;
       }
     }
 
@@ -221,15 +346,15 @@ int main() {
 
     if (check1_ball == 1) {
       check2_ball = 1;
-      time(&start_ball_t);
+      time( & start_ball_t);
       diff += 10;
     }
     if (check2_ball == 1) {
-      time(&end_ball_t);
+      time( & end_ball_t);
       diff_ball_time = difftime(end_ball_t, start_ball_t);
       if (diff_ball_time >= 15) {
-	check2_ball = 0;
-	diff -= 10;
+        check2_ball = 0;
+        diff -= 10;
       }
     }
 
@@ -238,15 +363,15 @@ int main() {
 
     if (check1_bar == 1) {
       check2_bar = 1;
-      time(&start_bar_t);
+      time( & start_bar_t);
       speed = 8;
     }
     if (check2_bar == 1) {
-      time(&end_bar_t);
+      time( & end_bar_t);
       diff_bar_time = difftime(end_bar_t, start_bar_t);
       if (diff_bar_time == 15) {
-	check2_bar = 0;
-	speed = 0;
+        check2_bar = 0;
+        speed = 0;
       }
     }
 
@@ -254,11 +379,11 @@ int main() {
       break;
 
     if (platform.lx <= 0 && platform.rx + size <= 0) {
-      platform.lx = maxX + 10 - 100 -size-size;
+      platform.lx = maxX + 10 - 100 - size - size;
       platform.rx = maxX + 10;
     }
     if (platform.rx >= maxX + 10 && platform.lx - size >= maxX + 10) {
-      platform.rx = 100+size+size;
+      platform.rx = 100 + size + size;
       platform.lx = 0;
     }
   }
@@ -267,25 +392,23 @@ int main() {
   setcolor(WHITE);
   settextstyle(DEFAULT_FONT, HORIZ_DIR, 5);
   char buffer[50];
-  sprintf(buffer,"You Lose :(");
-  if (endGame == 0)
-{
-	    outtextxy((maxX / 2) - 200, (maxY / 2), "You Win! :)");
+  sprintf(buffer, "You Lose :(");
+  if (endGame == 0) {
+    outtextxy((maxX / 2) - 200, (maxY / 2), "You Win! :)");
 
-}
-  else
-  outtextxy((maxX / 2) - 250, (maxY / 2),buffer);
+  } else
+    outtextxy((maxX / 2) - 250, (maxY / 2), buffer);
   outtextxy((maxX / 2) - 250, (maxY / 2) - 50, scoreBoard);
-   //leaderboard
-   getch();
-   cleardevice();
-   outtextxy((maxX/2)-250,(maxY/2),"Name : ");
-   leaderboard(score);
+  //leaderboard
+  getch();
+  cleardevice();
+  outtextxy((maxX / 2) - 250, (maxY / 2), "Name : ");
+  leaderboard(score);
   closegraph();
   return 0;
 }
 
-void testRebound(int& x, int& y) {
+void testRebound(int & x, int & y) {
   if (ball.x == x || ball.x == x - 1 || ball.x == x + 1)
     testY = 1;
   else if (ball.x == balls || ball.x == balls + 1 || ball.x == balls - 1)
@@ -296,109 +419,102 @@ void testRebound(int& x, int& y) {
   for (int i = 0; i < len; i++) {
     if (b[i].hitCounter > 0) {
       if ((ball.x == b[i].lx - balls || ball.x == b[i].lx - (balls + 1) ||
-	   ball.x == b[i].lx - (balls - 1)) &&
-	  (ball.y >= b[i].ly - balls) && (ball.y <= b[i].ry + balls)) {
-	testY = 1;  // ball touches left side
-	b[i].hitCounter--;
-	if (b[i].hitCounter == 0) {
-	  score += 50;
-	  endGame--;
-	}
+          ball.x == b[i].lx - (balls - 1)) &&
+        (ball.y >= b[i].ly - balls) && (ball.y <= b[i].ry + balls)) {
+        testY = 1; // ball touches left side
+        b[i].hitCounter--;
+        if (b[i].hitCounter == 0) {
+          score += 50;
+          endGame--;
+        }
       }
       if ((ball.y == b[i].ry + balls || ball.y == b[i].ry + (balls + 1) ||
-	   ball.y == b[i].ry + (balls - 1)) &&
-	  (ball.x >= b[i].lx - balls) && (ball.x <= b[i].rx + balls)) {
-	testX = 0;  // ball touches the bottom side
-	b[i].hitCounter--;
-	if (b[i].hitCounter == 0) {
-	  score += 50;
-	  endGame--;
-	}
+          ball.y == b[i].ry + (balls - 1)) &&
+        (ball.x >= b[i].lx - balls) && (ball.x <= b[i].rx + balls)) {
+        testX = 0; // ball touches the bottom side
+        b[i].hitCounter--;
+        if (b[i].hitCounter == 0) {
+          score += 50;
+          endGame--;
+        }
       }
       if ((ball.x == b[i].rx + balls || ball.x == b[i].rx + balls + 1 ||
-	   ball.x == b[i].rx + balls - 1) &&
-	  (ball.y >= b[i].ly - balls) && (ball.y <= b[i].ry + balls)) {
-	testY = 0;  // ball touches right side
-	b[i].hitCounter--;
-	if (b[i].hitCounter == 0) {
-	  score += 50;
-	  endGame--;
-	}
+          ball.x == b[i].rx + balls - 1) &&
+        (ball.y >= b[i].ly - balls) && (ball.y <= b[i].ry + balls)) {
+        testY = 0; // ball touches right side
+        b[i].hitCounter--;
+        if (b[i].hitCounter == 0) {
+          score += 50;
+          endGame--;
+        }
       }
 
       if ((ball.y == b[i].ly - balls || ball.y == b[i].ly - (balls + 1) ||
-	   ball.y == b[i].ly - (balls - 1)) &&
-	  (ball.x >= b[i].lx - balls) && (ball.x <= b[i].rx + balls)) {
-	testX = 1;  // ball touches upper side
-	b[i].hitCounter--;
-	if (b[i].hitCounter == 0) {
-	  score += 50;
-	  endGame--;
-	}
+          ball.y == b[i].ly - (balls - 1)) &&
+        (ball.x >= b[i].lx - balls) && (ball.x <= b[i].rx + balls)) {
+        testX = 1; // ball touches upper side
+        b[i].hitCounter--;
+        if (b[i].hitCounter == 0) {
+          score += 50;
+          endGame--;
+        }
       }
     }
   }
 }
 void move() {
-  if (testX == 0)  // if ball touches the top
+  if (testX == 0) // if ball touches the top
     ball.y += 3;
-  else if (testX == 1)  // if ball touches bottom/bar
+  else if (testX == 1) // if ball touches bottom/bar
     ball.y -= 3;
-  if (testY == 0)  // if ball touches left
+  if (testY == 0) // if ball touches left
     ball.x += 3;
-  else if (testY == 1)  // if ball touches right
+  else if (testY == 1) // if ball touches right
     ball.x -= 3;
 }
 
-void leaderboard(int score)
-{
-	    settextstyle(DEFAULT_FONT,HORIZ_DIR,2);
-	    setcolor(YELLOW);
-	    char buffer[50];
-	    scanf("%d",lead.leader_name);
-	    lead.leader_score=score;
-	    ofstream ofile("leader.dat", ios::binary|ios::ate);
-	    ifstream ifile("leader.dat",ios::binary);
-	   // ofile.write((char*)&lead,sizeof(lead));
-	   // ofile.close();
-	   // ifstream ifile("leader.dat",ios::binary);
-		    leader temp;
-		    ofile.seekg(0);
-		    while(!ifile.eof())
-		    {
-			ifile.read((char*)&temp,sizeof(temp));
-			if(temp.leader_score<lead.leader_score)
-			{
-				ifile.seekp(ofile.tellg()-(sizeof(temp)),ios::beg);
-			       ofile.write((char*)&lead,sizeof(lead));
-				break;
-			}
-			else {
-				file.seekp(-1,ios::end);
-				file.write((char*)&lead,sizeof(lead));
-			}
-			}
-		file.close();
-		print_leaderboard();
+void leaderboard(int score) {
+  settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
+  setcolor(YELLOW);
+  char buffer[50];
+  scanf("%d", lead.leader_name);
+  lead.leader_score = score;
+  ofstream ofile("leader.dat", ios::binary | ios::ate);
+  ifstream ifile("leader.dat", ios::binary);
+  // ofile.write((char*)&lead,sizeof(lead));
+  // ofile.close();
+  // ifstream ifile("leader.dat",ios::binary);
+  leader temp;
+  ofile.seekg(0);
+  while (!ifile.eof()) {
+    ifile.read((char * ) & temp, sizeof(temp));
+    if (temp.leader_score < lead.leader_score) {
+      ifile.seekp(ofile.tellg() - (sizeof(temp)), ios::beg);
+      ofile.write((char * ) & lead, sizeof(lead));
+      break;
+    } else {
+      file.seekp(-1, ios::end);
+      file.write((char * ) & lead, sizeof(lead));
+    }
+  }
+  file.close();
+  print_leaderboard();
 }
 
-void print_leaderboard()
-{
-	cleardevice();
-	settextstyle(DEFAULT_FONT,HORIZ_DIR,2);
-	setcolor(YELLOW);
-	ifstream ifile("leader.dat",ios::binary);
-	for(int i=0;i<10;i++)
-	{
-		char buffer[50];
-		leader temp;
-		ifile.read((char*)&temp,sizeof(temp));
-		sprintf(buffer,"%d",temp.leader_score);
-		outtextxy((getmaxx()/2)-250,(getmaxy()/2)-100 -(i*20),temp.leader_name);
-		outtextxy((getmaxx()/2)-100,(getmaxy()/2)-100 - (i*20),buffer);
-		if(ifile.eof())
-			break;
-	}
-	getch();
+void print_leaderboard() {
+  cleardevice();
+  settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
+  setcolor(YELLOW);
+  ifstream ifile("leader.dat", ios::binary);
+  for (int i = 0; i < 10; i++) {
+    char buffer[50];
+    leader temp;
+    ifile.read((char * ) & temp, sizeof(temp));
+    sprintf(buffer, "%d", temp.leader_score);
+    outtextxy((getmaxx() / 2) - 250, (getmaxy() / 2) - 100 - (i * 20), temp.leader_name);
+    outtextxy((getmaxx() / 2) - 100, (getmaxy() / 2) - 100 - (i * 20), buffer);
+    if (ifile.eof())
+      break;
+  }
+  getch();
 }
-
